@@ -1,0 +1,6 @@
+tls:
+  enabled: true
+  clusterIssuer: letsencrypt-prod
+  secretName: csirt-tls
+ingress:
+  entrypoint: web,websecure

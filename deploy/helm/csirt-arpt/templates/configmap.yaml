@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: csirt-config
+  labels:
+    {{- include "csirt.labels" . | nindent 4 }}
+data:
+  NODE_ENV: production
+  PORT: "3000"
+  HOSTNAME: 0.0.0.0
+  USE_MOCK_DATA: "false"
+  NEXT_PUBLIC_USE_MOCK_DATA: "false"
+  NEXTAUTH_URL: {{ .Values.publicUrl | quote }}
+  EMAIL_PUBLIC_BASE_URL: {{ .Values.publicUrl | quote }}
+  NEXT_PUBLIC_APP_URL: {{ .Values.publicUrl | quote }}
+  S3_ENDPOINT: {{ .Values.s3.endpoint | quote }}
+  S3_BUCKET: {{ .Values.s3.bucket | quote }}
+  S3_REGION: {{ .Values.s3.region | quote }}
+  S3_FORCE_PATH_STYLE: {{ .Values.s3.forcePathStyle | quote }}

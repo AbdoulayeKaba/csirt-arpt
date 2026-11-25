@@ -1,0 +1,132 @@
+/* Shared edit styles for institutional legal layouts */
+
+.csirt-legal-edit__inline,
+.csirt-legal-edit__heading,
+.csirt-legal-edit__body,
+.csirt-legal-edit__card-title,
+.csirt-legal-edit__card-body,
+.csirt-legal-edit__href,
+.csirt-legal-edit__btn,
+.csirt-legal-edit__note {
+  width: 100%;
+  border: 1px dashed transparent;
+  border-radius: 0.3rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.csirt-legal--editable input.csirt-legal-edit__inline,
+.csirt-legal--editable input.csirt-legal-edit__heading,
+.csirt-legal--editable textarea.csirt-legal-edit__body,
+.csirt-legal--editable input.csirt-legal-edit__card-title,
+.csirt-legal--editable textarea.csirt-legal-edit__card-body,
+.csirt-legal--editable input.csirt-legal-edit__href,
+.csirt-legal--editable input.csirt-legal-edit__btn,
+.csirt-legal--editable textarea.csirt-legal-edit__note,
+.csirt-privacy--editable input.csirt-legal-edit__inline,
+.csirt-privacy--editable input.csirt-legal-edit__heading,
+.csirt-privacy--editable textarea.csirt-legal-edit__body,
+.csirt-privacy--editable input.csirt-legal-edit__card-title,
+.csirt-privacy--editable textarea.csirt-legal-edit__card-body,
+.csirt-privacy--editable input.csirt-legal-edit__href,
+.csirt-privacy--editable input.csirt-legal-edit__btn,
+.csirt-privacy--editable textarea.csirt-legal-edit__note,
+.csirt-a11y--editable input.csirt-legal-edit__inline,
+.csirt-a11y--editable input.csirt-legal-edit__heading,
+.csirt-a11y--editable textarea.csirt-legal-edit__body,
+.csirt-a11y--editable input.csirt-legal-edit__card-title,
+.csirt-a11y--editable textarea.csirt-legal-edit__card-body,
+.csirt-a11y--editable input.csirt-legal-edit__href,
+.csirt-a11y--editable input.csirt-legal-edit__btn,
+.csirt-a11y--editable textarea.csirt-legal-edit__note {
+  border-color: color-mix(in oklab, #0d5c3d 28%, transparent);
+  background: color-mix(in oklab, #fff 92%, #ecfdf5);
+  color: #0f172a;
+  padding: 0.2rem 0.4rem;
+}
+
+.csirt-legal--editable input:focus,
+.csirt-legal--editable textarea:focus,
+.csirt-privacy--editable input:focus,
+.csirt-privacy--editable textarea:focus,
+.csirt-a11y--editable input:focus,
+.csirt-a11y--editable textarea:focus {
+  border-color: #0d5c3d;
+  box-shadow: 0 0 0 2px color-mix(in oklab, #0d5c3d 18%, transparent);
+}
+
+.csirt-legal-edit__heading {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.csirt-legal-edit__body {
+  display: block;
+  margin-top: 0.25rem;
+  color: #475569;
+  font-size: 0.86rem;
+}
+
+.csirt-legal-edit__card-title {
+  display: block;
+  font-weight: 780;
+}
+
+.csirt-legal-edit__card-body {
+  display: block;
+  margin-top: 0.2rem;
+  color: #64748b;
+  font-size: 0.84rem;
+}
+
+.csirt-legal-edit__inline {
+  display: inline-block;
+  width: auto;
+  min-width: 7rem;
+}
+
+.csirt-legal-edit__href {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  color: #0f766e;
+}
+
+.csirt-legal-edit__btn {
+  width: auto;
+  min-width: 7rem;
+  text-align: center;
+  font-weight: 750;
+}
+
+.csirt-legal-edit__inline.is-on-dark,
+.csirt-legal-edit__heading.is-on-dark,
+.csirt-legal-edit__body.is-on-dark,
+.csirt-legal-edit__href.is-on-dark {
+  color: #fff !important;
+  background: color-mix(in oklab, #000 35%, transparent) !important;
+  border-color: color-mix(in oklab, #fff 35%, transparent) !important;
+}
+
+.csirt-privacy__btn.is-editable,
+.csirt-a11y__btn.is-editable {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.csirt-privacy--editable .csirt-privacy__btn.is-primary input.csirt-legal-edit__btn,
+.csirt-a11y--editable .csirt-a11y__btn.is-primary input.csirt-legal-edit__btn {
+  background: #fff !important;
+  color: #0f172a !important;
+}
+
+.csirt-privacy--editable .csirt-privacy__btn.is-secondary input.csirt-legal-edit__btn,
+.csirt-a11y--editable .csirt-a11y__btn.is-secondary input.csirt-legal-edit__btn {
+  background: #fff !important;
+  color: #0f172a !important;
+}

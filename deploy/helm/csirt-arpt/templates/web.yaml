@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csirt-web
+  labels:
+    {{- include "csirt.labels" . | nindent 4 }}
+    app: csirt-web
+  annotations:
+    csirt.arpt.gov.gn/target-replicas: {{ .Values.targetReplicas | quote }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: csirt-web
+  template:
+    metadata:
+      labels:
+        {{- include "csirt.labels" . | nindent 8 }}
+        app: csirt-web
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: web
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: csirt-config
+            - secretRef:
+                name: {{ .Values.appSecret }}
+          resources:
+            {{- toYaml .Values.web.resources | nindent 12 }}
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 5
+            failureThreshold: 36
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health/db
+              port: http
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: csirt-web
+  labels:
+    {{- include "csirt.labels" . | nindent 4 }}
+    app: csirt-web
+spec:
+  type: ClusterIP
+  selector:
+    app: csirt-web
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http

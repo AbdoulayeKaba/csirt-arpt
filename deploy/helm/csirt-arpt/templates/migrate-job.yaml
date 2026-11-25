@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: csirt-migrate
+  labels:
+    {{- include "csirt.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "5"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app: csirt-migrate
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.migrate.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.appSecret }}
+          command: ["sh", "-c"]
+          args:
+            - |
+              node -e 'const net=require("net");const once=()=>new Promise((resolve)=>{const s=net.connect({host:"mysql",port:3306});const done=(ok)=>{s.destroy();resolve(ok);};s.setTimeout(2000);s.on("connect",()=>done(true));s.on("timeout",()=>done(false));s.on("error",()=>done(false));});(async()=>{for(let i=0;i<90;i++){if(await once())process.exit(0);await new Promise((r)=>setTimeout(r,2000));}process.exit(1);})();'
+              npx prisma migrate deploy

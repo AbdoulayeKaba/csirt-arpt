@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: csirt-web
+  labels:
+    app: csirt-web
+spec:
+  type: ClusterIP
+  selector:
+    app: csirt-web
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http

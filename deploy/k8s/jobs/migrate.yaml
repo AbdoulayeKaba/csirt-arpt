@@ -1,0 +1,25 @@
+# Job contrôlé. Le script bootstrap-vm.sh le lance après MySQL.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: csirt-migrate
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app: csirt-migrate
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: migrate
+          image: docker.io/library/csirt-arpt:migrate
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: csirt-app

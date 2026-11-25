@@ -1,0 +1,658 @@
+.sig-profile {
+  --ink: #142033;
+  --muted: #667085;
+  --line: #e6ece8;
+  --green: #1f8f3a;
+  --green-deep: #157a30;
+  --field: #e7edf0;
+  background: #f4f7f6;
+  color: var(--ink);
+  padding: 0.65rem 0.85rem 1.25rem;
+}
+
+.sig-profile__wrap {
+  width: min(68rem, 100%);
+  margin: 0 auto;
+}
+
+.sig-profile__loading {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 14rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.sig-profile__crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0 0.45rem;
+  color: #8b97a6;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.sig-profile__crumb a {
+  display: inline-flex;
+  align-items: center;
+  color: #667085;
+  text-decoration: none;
+}
+
+.sig-profile__crumb a:hover {
+  color: var(--green-deep);
+}
+
+.sig-profile__crumb span {
+  color: var(--ink);
+}
+
+.sig-profile__crumb svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.sig-profile__banner {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.65rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #dceadf;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #f3faf5, #eef7f1);
+}
+
+.sig-profile__photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 0 0 auto;
+}
+
+.sig-profile__photo-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--green);
+  box-shadow: 0 0 0 4px rgb(31 143 58 / 0.08);
+  cursor: pointer;
+  overflow: visible;
+}
+
+.sig-profile__photo-btn img,
+.sig-profile__photo-fallback {
+  width: 3.1rem;
+  height: 3.1rem;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.sig-profile__photo-fallback {
+  display: grid;
+  place-items: center;
+  background: #e8f6ec;
+  color: var(--green-deep);
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+.sig-profile__photo-badge {
+  position: absolute;
+  right: -0.15rem;
+  bottom: -0.1rem;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+}
+
+.sig-profile__photo-badge svg {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+.sig-profile__photo-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.sig-profile__photo-link,
+.sig-profile__photo-remove {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sig-profile__photo-link {
+  color: var(--green-deep);
+}
+
+.sig-profile__photo-remove {
+  color: #98a2b3;
+}
+
+.sig-profile__photo-link:disabled,
+.sig-profile__photo-remove:disabled,
+.sig-profile__photo-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.sig-profile__banner h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.sig-profile__banner p {
+  margin: 0.1rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.sig-profile__note,
+.sig-profile__error {
+  margin: 0 0 0.5rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.7rem;
+  font-size: 0.84rem;
+}
+
+.sig-profile__note {
+  background: #eef8f1;
+  color: var(--green-deep);
+}
+
+.sig-profile__error {
+  background: #fdecec;
+  color: #9b2330;
+}
+
+.sig-profile__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.38fr) minmax(18.5rem, 0.82fr);
+  gap: 0.65rem;
+  align-items: start;
+}
+
+.sig-profile__col {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.sig-profile__card {
+  padding: 0.7rem 0.8rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(16 32 24 / 0.03);
+}
+
+.sig-profile__card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.6rem;
+}
+
+.sig-profile__card-head > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.sig-profile__card-head h2,
+.sig-profile__subhead strong {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.sig-profile__card-head p,
+.sig-profile__subhead p {
+  margin: 0.12rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.sig-profile__ico {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: #eef8f1;
+  color: var(--green);
+}
+
+.sig-profile__ico svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sig-profile__subhead {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+}
+
+.sig-profile__subhead > svg {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.12rem;
+  color: var(--green);
+}
+
+.sig-profile__fields {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sig-profile__fields--3 {
+  grid-template-columns: 1fr 1fr 1.15fr;
+}
+
+.sig-profile__fields--2 {
+  grid-template-columns: 1fr 1.35fr;
+  margin-top: 0.5rem;
+}
+
+.sig-field {
+  display: grid;
+  gap: 0.32rem;
+  min-width: 0;
+}
+
+.sig-field > span,
+.sig-field > span abbr {
+  color: #3d4b5c;
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.sig-field abbr {
+  color: #d14343;
+  text-decoration: none;
+}
+
+.sig-field__control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.15rem;
+  padding: 0 0.6rem;
+  border: 1px solid var(--field);
+  border-radius: 0.7rem;
+  background: #fff;
+}
+
+.sig-field__control:focus-within {
+  border-color: #b7dcc4;
+  box-shadow: 0 0 0 3px rgb(31 143 58 / 0.1);
+}
+
+.sig-field__control > svg {
+  flex: 0 0 auto;
+  width: 0.95rem;
+  height: 0.95rem;
+  color: #98a2b3;
+}
+
+.sig-field__control input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.sig-field__control input[readonly] {
+  color: #243044;
+}
+
+.sig-field__control.is-static,
+.sig-field__control.is-slug {
+  background: #f7f8f9;
+}
+
+.sig-field__eye,
+.sig-field__copy {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: #98a2b3;
+  cursor: pointer;
+}
+
+.sig-field__eye:hover,
+.sig-field__copy:hover {
+  color: var(--green-deep);
+}
+
+.sig-field__eye svg,
+.sig-field__copy svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.sig-org {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem;
+  border: 1px solid #d7eedd;
+  border-radius: 0.9rem;
+  background: #f3faf5;
+}
+
+.sig-org__mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+}
+
+.sig-org__mark svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.sig-org__body {
+  display: grid;
+  flex: 1 1 8rem;
+  min-width: 0;
+}
+
+.sig-org__body small {
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.sig-org__body strong {
+  font-size: 0.92rem;
+  letter-spacing: -0.02em;
+}
+
+.sig-org__body span {
+  color: #667085;
+  font-size: 0.75rem;
+}
+
+.sig-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: #eef1f4;
+  color: #667085;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.sig-pill i {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.sig-pill.is-on {
+  background: #e5f6ea;
+  color: var(--green);
+}
+
+.sig-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: #f3e8ff;
+  color: #7c3aed;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+.sig-type.is-empty {
+  background: #eef1f4;
+  color: #667085;
+}
+
+.sig-profile__hint,
+.sig-profile__empty {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.sig-profile__btn,
+.sig-profile__ghost,
+.sig-profile__outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 0.7rem;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sig-profile__btn {
+  width: fit-content;
+  min-height: 2.2rem;
+  padding: 0.4rem 0.75rem;
+  border: 0;
+  background: var(--green);
+  color: #fff;
+}
+
+.sig-profile__btn:hover {
+  background: var(--green-deep);
+}
+
+.sig-profile__btn.is-block {
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+.sig-profile__btn.is-quiet {
+  background: #fff;
+  color: #9b2330;
+  border: 1px solid #f0d0d4;
+}
+
+.sig-profile__btn:disabled,
+.sig-profile__ghost:disabled,
+.sig-profile__outline:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.sig-profile__btn svg,
+.sig-profile__ghost svg,
+.sig-profile__outline svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.sig-profile__ghost {
+  flex: 0 0 auto;
+  min-height: 2.15rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--field);
+  background: #fff;
+  color: #344054;
+}
+
+.sig-profile__ghost:hover {
+  border-color: #c9d4dc;
+}
+
+.sig-profile__outline {
+  min-height: 2.2rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #d7dee6;
+  background: #fff;
+  color: #344054;
+  white-space: nowrap;
+}
+
+.sig-profile__outline:hover {
+  border-color: #b7dcc4;
+  color: var(--green-deep);
+}
+
+.sig-profile__info {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.75rem 0.8rem;
+  border: 1px solid #d7e6fb;
+  border-radius: 0.75rem;
+  background: #eff6ff;
+  color: #1d4f91;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.sig-profile__info svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.1rem;
+}
+
+.sig-profile__info strong {
+  font-weight: 750;
+}
+
+.sig-profile__info.is-ok {
+  border-color: #d7eedd;
+  background: #f3faf5;
+  color: var(--green-deep);
+}
+
+.sig-profile__mfa {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sig-profile__mfa img {
+  width: 9.25rem;
+  height: 9.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: #fff;
+}
+
+.sig-profile__mfa-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sig-activity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.15rem 0 0.1rem;
+}
+
+.sig-activity > span {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.65rem;
+  background: #f4f6f8;
+  color: #667085;
+}
+
+.sig-activity > span svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.sig-activity strong,
+.sig-activity small {
+  display: block;
+}
+
+.sig-activity strong {
+  font-size: 0.86rem;
+}
+
+.sig-activity small,
+.sig-activity time {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.sig-activity time {
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .sig-profile__layout,
+  .sig-profile__fields--3,
+  .sig-profile__fields--2 {
+    grid-template-columns: 1fr;
+  }
+
+  .sig-profile__card-head {
+    flex-wrap: wrap;
+  }
+
+  .sig-activity {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .sig-activity time {
+    grid-column: 2;
+  }
+}

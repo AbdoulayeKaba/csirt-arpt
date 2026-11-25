@@ -1,0 +1,32 @@
+name: preprod
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    environment: preprod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v4
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.16.4
+      - name: Installer la préproduction
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        run: |
+          test -n "$KUBE_CONFIG"
+          mkdir -p "$HOME/.kube"
+          printf '%s\n' "$KUBE_CONFIG" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+          helm upgrade --install csirt-preprod deploy/helm/csirt-arpt \
+            --namespace csirt-preprod \
+            --create-namespace \
+            --values deploy/helm/csirt-arpt/values-preprod.yaml \
+            --timeout 10m
+          kubectl -n csirt-preprod rollout status deployment/csirt-web --timeout=240s

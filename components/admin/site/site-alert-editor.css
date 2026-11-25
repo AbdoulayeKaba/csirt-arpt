@@ -1,0 +1,227 @@
+.site-alert-editor {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.site-alert-editor__state {
+  display: grid;
+  justify-items: start;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid #d7e6dc;
+  border-radius: 0.9rem;
+  background: #fff;
+  color: #3d5c4a;
+  font-size: 0.86rem;
+}
+
+.site-alert-editor__state strong {
+  color: #12301e;
+  font-size: 0.98rem;
+}
+
+.site-alert-editor__layout {
+  display: grid;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+@media (min-width: 1080px) {
+  .site-alert-editor__layout {
+    grid-template-columns: minmax(0, 1fr) 18.5rem;
+  }
+}
+
+.site-alert-editor__sheet {
+  min-width: 0;
+}
+
+.site-alert-editor__error {
+  margin: 0 0 0.55rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #fecaca;
+  border-radius: 0.55rem;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 0.8rem;
+  font-style: normal;
+}
+
+.site-alert-editor .site-rte--document {
+  min-height: 38rem;
+}
+
+.site-alert-editor .site-rte-page {
+  width: min(100%, 48rem);
+  min-height: 34rem;
+  padding: 1.35rem 1.45rem 1.8rem;
+}
+
+.site-alert-editor .site-rte--document .tiptap,
+.site-alert-editor .site-rte--document .site-rte-content {
+  min-height: 16rem;
+  max-height: none;
+  padding: 0.2rem 0 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.site-alert-doc {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #e3eee7;
+}
+
+.site-alert-doc__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  color: #157a30;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-alert-doc__title,
+.site-alert-doc__lead {
+  display: grid;
+  gap: 0.28rem;
+  margin: 0;
+}
+
+.site-alert-doc__title textarea,
+.site-alert-doc__lead textarea {
+  width: 100%;
+  border: 0;
+  resize: vertical;
+  background: transparent;
+  color: #12301e;
+  font-family: inherit;
+}
+
+.site-alert-doc__title textarea {
+  min-height: 2.6rem;
+  padding: 0;
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.site-alert-doc__lead span {
+  color: #3d7a52;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-alert-doc__lead textarea {
+  min-height: 4.2rem;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #3d5346;
+}
+
+.site-alert-doc__title textarea:focus,
+.site-alert-doc__lead textarea:focus {
+  outline: none;
+}
+
+.site-alert-doc__title textarea:disabled,
+.site-alert-doc__lead textarea:disabled {
+  color: #12301e;
+}
+
+.site-alert-editor__rail {
+  display: grid;
+  gap: 0.7rem;
+}
+
+@media (min-width: 1080px) {
+  .site-alert-editor__rail {
+    position: sticky;
+    top: 0.75rem;
+  }
+}
+
+.site-alert-editor__rail section {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid #d7e6dc;
+  border-radius: 0.9rem;
+  background: #fff;
+}
+
+.site-alert-editor__rail h2 {
+  margin: 0;
+  color: #157a30;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.site-alert-editor__rail p,
+.site-alert-editor__rail small {
+  margin: 0;
+  color: #5d7566;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.site-alert-editor__rail label {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.site-alert-editor__rail label span {
+  color: #3d5346;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.site-alert-editor__switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+}
+
+.site-alert-editor__switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-height: 2.15rem;
+  border: 1px solid #d5e4da;
+  border-radius: 0.55rem;
+  background: #f7fbf8;
+  color: #3d5346;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.site-alert-editor__switch button.is-on {
+  border-color: #86c9a4;
+  background: #e7f6ec;
+  color: #0e6a32;
+}
+
+.site-alert-editor__switch button.is-off {
+  border-color: #e7d3a1;
+  background: #fff8eb;
+  color: #92400e;
+}
+
+.site-alert-editor__id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.68rem !important;
+  word-break: break-all;
+}

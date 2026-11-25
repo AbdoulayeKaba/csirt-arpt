@@ -1,0 +1,32 @@
+name: prod
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v4
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.16.4
+      - name: Installer la production
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_PROD }}
+        run: |
+          test -n "$KUBE_CONFIG"
+          mkdir -p "$HOME/.kube"
+          printf '%s\n' "$KUBE_CONFIG" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+          helm upgrade --install csirt-prod deploy/helm/csirt-arpt \
+            --namespace csirt-prod \
+            --create-namespace \
+            --values deploy/helm/csirt-arpt/values-prod.yaml \
+            --timeout 10m
+          kubectl -n csirt-prod rollout status deployment/csirt-web --timeout=240s

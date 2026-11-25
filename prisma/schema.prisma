@@ -1,0 +1,197 @@
+// CSIRT-ARPT — console de réponse aux incidents (MySQL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String?   @map("password_hash")
+  microsoftId       String?   @unique @map("microsoft_id") @db.VarChar(191)
+  firstName         String    @map("first_name")
+  lastName          String    @map("last_name")
+  role              String    @default("MANAGER") @db.VarChar(64)
+  active            Boolean   @default(true)
+  archived          Boolean   @default(false)
+  archivedAt        DateTime? @map("archived_at")
+  department        String?   @db.VarChar(120)
+  phone             String?   @db.VarChar(40)
+  avatarUrl         String?   @map("avatar_url") @db.VarChar(500)
+  sessionVersion    Int       @default(0) @map("session_version")
+  passwordChangedAt DateTime? @map("password_changed_at")
+  lastLoginAt       DateTime? @map("last_login_at")
+  twoFactorEnabled  Boolean   @default(false) @map("two_factor_enabled")
+  twoFactorSecret   String?   @map("two_factor_secret") @db.VarChar(64)
+  /// Hash du code e-mail à usage unique (jamais le code en clair).
+  emailOtpHash      String?   @map("email_otp_hash") @db.VarChar(64)
+  emailOtpExpiresAt DateTime? @map("email_otp_expires_at")
+  emailOtpAttempts  Int       @default(0) @map("email_otp_attempts")
+  /// Organisation rattachée (obligatoire métier pour le rôle CORRESPONDANT).
+  organizationId    String?   @map("organization_id")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  organization             Organization?      @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  invitationsSent          UserInvitation[]   @relation("InvitationsSent")
+  auditLogs                AuditLog[]
+  orgDeactivationsRequested OrganizationDeactivationRequest[] @relation("OrgDeactivationRequested")
+  orgDeactivationsDecided   OrganizationDeactivationRequest[] @relation("OrgDeactivationDecided")
+  correspondentDeactivations          CorrespondentDeactivationRequest[] @relation("CorrespondentDeactivationSubject")
+  correspondentDeactivationsRequested CorrespondentDeactivationRequest[] @relation("CorrespondentDeactivationRequested")
+  correspondentDeactivationsDecided   CorrespondentDeactivationRequest[] @relation("CorrespondentDeactivationDecided")
+
+  @@index([organizationId])
+  @@map("users")
+}
+
+/// Organisation externe invitée à déclarer des incidents (portail signalement).
+model Organization {
+  id           String   @id @default(cuid())
+  name         String   @db.VarChar(200)
+  slug         String   @unique @db.VarChar(120)
+  active       Boolean  @default(true)
+  /// Domaines e-mail autorisés (JSON string[]), optionnel.
+  emailDomains String?  @map("email_domains") @db.Text
+  notes        String?  @db.Text
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  users       User[]
+  invitations UserInvitation[]
+  deactivationRequests OrganizationDeactivationRequest[]
+
+  @@map("organizations")
+}
+
+enum OrganizationDeactivationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+  CANCELLED
+}
+
+/// Demande de désactivation d’une organisation partenaire.
+/// Un administrateur l’initie ; le super administrateur l’autorise.
+model OrganizationDeactivationRequest {
+  id                String                         @id @default(cuid())
+  organizationId    String                         @map("organization_id")
+  status            OrganizationDeactivationStatus @default(PENDING)
+  requestedById     String?                        @map("requested_by_id")
+  requestedByName   String                         @map("requested_by_name") @db.VarChar(191)
+  requestedByEmail  String                         @map("requested_by_email") @db.VarChar(191)
+  expiresAt         DateTime                       @map("expires_at")
+  decidedById       String?                        @map("decided_by_id")
+  decidedByName     String?                        @map("decided_by_name") @db.VarChar(191)
+  decidedAt         DateTime?                      @map("decided_at")
+  decisionNote      String?                        @map("decision_note") @db.Text
+  createdAt         DateTime                       @default(now()) @map("created_at")
+  updatedAt         DateTime                       @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  requestedBy  User?        @relation("OrgDeactivationRequested", fields: [requestedById], references: [id], onDelete: SetNull)
+  decidedBy    User?        @relation("OrgDeactivationDecided", fields: [decidedById], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([status, expiresAt])
+  @@map("organization_deactivation_requests")
+}
+
+/// Demande de désactivation d’un compte correspondant.
+/// Un administrateur l’initie ; le super administrateur l’autorise.
+model CorrespondentDeactivationRequest {
+  id               String                         @id @default(cuid())
+  userId           String                         @map("user_id")
+  status           OrganizationDeactivationStatus @default(PENDING)
+  requestedById    String?                        @map("requested_by_id")
+  requestedByName  String                         @map("requested_by_name") @db.VarChar(191)
+  requestedByEmail String                         @map("requested_by_email") @db.VarChar(191)
+  expiresAt        DateTime                       @map("expires_at")
+  decidedById      String?                        @map("decided_by_id")
+  decidedByName    String?                        @map("decided_by_name") @db.VarChar(191)
+  decidedAt        DateTime?                      @map("decided_at")
+  createdAt        DateTime                       @default(now()) @map("created_at")
+  updatedAt        DateTime                       @updatedAt @map("updated_at")
+
+  user        User  @relation("CorrespondentDeactivationSubject", fields: [userId], references: [id], onDelete: Cascade)
+  requestedBy User? @relation("CorrespondentDeactivationRequested", fields: [requestedById], references: [id], onDelete: SetNull)
+  decidedBy   User? @relation("CorrespondentDeactivationDecided", fields: [decidedById], references: [id], onDelete: SetNull)
+
+  @@index([userId, status])
+  @@index([status, expiresAt])
+  @@map("correspondent_deactivation_requests")
+}
+
+/// Invitation à créer un compte CORRESPONDANT rattaché à une organisation.
+enum UserInvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+  CANCELLED
+}
+
+model UserInvitation {
+  id             String               @id @default(cuid())
+  email          String               @db.VarChar(191)
+  organizationId String               @map("organization_id")
+  /// Hash du token d'invitation (jamais le token en clair).
+  tokenHash      String               @unique @map("token_hash") @db.VarChar(128)
+  status         UserInvitationStatus @default(PENDING)
+  invitedById    String               @map("invited_by_id")
+  expiresAt      DateTime             @map("expires_at")
+  acceptedAt     DateTime?            @map("accepted_at")
+  lastSentAt     DateTime?            @map("last_sent_at")
+  createdAt      DateTime             @default(now()) @map("created_at")
+  updatedAt      DateTime             @updatedAt @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invitedBy    User         @relation("InvitationsSent", fields: [invitedById], references: [id], onDelete: Restrict)
+
+  @@index([email, status])
+  @@index([organizationId, status])
+  @@index([expiresAt])
+  @@map("user_invitations")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  action    String   @db.VarChar(120)
+  meta      Json?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+  @@map("dg_audit_logs")
+}
+
+model PlatformSetting {
+  key         String   @id @db.VarChar(64)
+  value       String   @db.LongText
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  updatedById String?  @map("updated_by_id")
+
+  @@map("platform_settings")
+}
+
+/// Référentiels configurables (thématiques, départements, types de déclarant, organisations, natures de signalement).
+model ReferentialItem {
+  id         String   @id @default(cuid())
+  categoryId String   @map("category_id") @db.VarChar(32)
+  name       String   @db.VarChar(200)
+  value      String?  @db.VarChar(64)
+  meta       Json?
+  archived   Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([categoryId, archived])
+  @@map("dg_referential_items")
+}

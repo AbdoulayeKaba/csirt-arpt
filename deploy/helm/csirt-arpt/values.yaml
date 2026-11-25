@@ -1,0 +1,68 @@
+environment: preprod
+replicaCount: 1
+targetReplicas: 1
+host: preprod-csirt.arpt.gov.gn
+publicUrl: http://preprod-csirt.arpt.gov.gn
+
+image:
+  repository: docker.io/library/csirt-arpt
+  tag: app
+  pullPolicy: IfNotPresent
+
+migrate:
+  tag: migrate
+
+web:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 640Mi
+
+s3:
+  endpoint: http://minio:9000
+  bucket: csirt-preprod
+  region: us-east-1
+  forcePathStyle: "true"
+
+mysql:
+  image: mysql:8.0
+  storage: 10Gi
+  bufferPool: 128M
+  secretName: mysql-auth
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 384Mi
+
+minio:
+  image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+  storage: 10Gi
+  secretName: minio-root
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+appSecret: csirt-app
+
+cron:
+  image: curlimages/curl:8.11.1
+  schedule: "15 * * * *"
+
+ingress:
+  className: traefik
+  entrypoint: web
+
+tls:
+  enabled: false
+  clusterIssuer: ""
+  secretName: csirt-tls

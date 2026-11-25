@@ -1,0 +1,34 @@
+environment: prod
+replicaCount: 1
+targetReplicas: 5
+host: csirt.arpt.gov.gn
+publicUrl: http://csirt.arpt.gov.gn
+web:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 768Mi
+s3:
+  bucket: csirt-prod
+mysql:
+  storage: 20Gi
+  bufferPool: 192M
+  resources:
+    requests:
+      cpu: 100m
+      memory: 192Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+minio:
+  storage: 50Gi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 384Mi

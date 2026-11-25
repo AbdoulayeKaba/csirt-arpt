@@ -1,0 +1,12 @@
+environment: preprod
+replicaCount: 1
+targetReplicas: 1
+host: preprod-csirt.arpt.gov.gn
+publicUrl: http://preprod-csirt.arpt.gov.gn
+s3:
+  bucket: csirt-preprod
+mysql:
+  storage: 10Gi
+  bufferPool: 128M
+minio:
+  storage: 10Gi

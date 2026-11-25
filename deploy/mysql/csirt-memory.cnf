@@ -1,0 +1,7 @@
+# Déposer dans /etc/mysql/mysql.conf.d/csirt-memory.cnf
+# Plafond pour la VM de 7,8 Gio. Ne pas ouvrir MySQL sur toutes les interfaces.
+[mysqld]
+bind-address = 192.168.1.47
+innodb_buffer_pool_size = 512M
+max_connections = 50
+performance_schema = OFF

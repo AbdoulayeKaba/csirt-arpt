@@ -1,0 +1,7 @@
+apiVersion: v2
+name: csirt-arpt
+description: CSIRT-ARPT, un environnement (préproduction ou production) avec MySQL et MinIO
+type: application
+version: 0.1.1
+appVersion: "1112"
+kubeVersion: ">=1.28.0"

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: csirt-preprod
+  labels:
+    app.kubernetes.io/part-of: csirt-arpt
+    environment: preprod

@@ -1,0 +1,197 @@
+.analyst-dashboard-kpi-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+@media (max-width: 900px) {
+  .analyst-dashboard-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .analyst-dashboard-kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.analyst-dashboard-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 1.35rem 1.15rem 1.45rem;
+  background:
+    radial-gradient(90% 120% at 0% 0%, rgba(13, 92, 61, 0.07), transparent 55%),
+    linear-gradient(180deg, #f8fbf9 0%, #ffffff 70%);
+}
+
+.analyst-dashboard-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.7rem;
+  background: linear-gradient(160deg, #e8f6ee, #d4ecdf);
+  border: 1px solid #b7d9c6;
+  color: #0d5c3d;
+  margin-bottom: 0.25rem;
+}
+
+.analyst-dashboard-empty h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #12301e;
+  letter-spacing: -0.015em;
+}
+
+.analyst-dashboard-empty p {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.analyst-dashboard-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.55rem;
+  background: linear-gradient(180deg, #1a7a4a 0%, #0d5c3d 100%);
+  color: #fff !important;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -10px rgba(13, 92, 61, 0.55);
+}
+
+.analyst-dashboard-empty-cta:hover {
+  filter: brightness(1.05);
+}
+
+.analyst-dashboard-case-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0.55rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.analyst-dashboard-case {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.7rem;
+  border: 1px solid #dce8e1;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.analyst-dashboard-case:hover {
+  border-color: #9fc4b0;
+  box-shadow: 0 10px 24px -18px rgba(13, 92, 61, 0.45);
+  transform: translateY(-1px);
+}
+
+.analyst-dashboard-case-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.analyst-dashboard-case-ref {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: #0d5c3d;
+}
+
+.analyst-dashboard-case-org {
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: #12301e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.analyst-dashboard-case-target {
+  font-size: 0.7rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.analyst-dashboard-case-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.analyst-dashboard-sev {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 750;
+  color: #fff;
+  background: var(--sev, #0d5c3d);
+}
+
+.analyst-dashboard-status {
+  display: inline-flex;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  background: #f1f5f4;
+  color: #334155;
+  border: 1px solid #dce4df;
+}
+
+.analyst-dashboard-when {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  min-width: 5.5rem;
+  text-align: right;
+}
+
+.analyst-dashboard-case-arrow {
+  color: #0d5c3d;
+  opacity: 0.55;
+}
+
+.analyst-dashboard-case:hover .analyst-dashboard-case-arrow {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .analyst-dashboard-case {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .analyst-dashboard-case-meta {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .analyst-dashboard-when {
+    text-align: left;
+  }
+}

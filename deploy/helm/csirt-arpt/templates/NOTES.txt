@@ -1,0 +1,6 @@
+Environnement {{ .Values.environment }} installé dans {{ .Release.Namespace }}.
+Chart {{ .Chart.Name }} {{ .Chart.Version }}, application {{ .Chart.AppVersion }}.
+Adresse : {{ .Values.publicUrl }}
+Répliques actuelles : {{ .Values.replicaCount }}. Cible après ajout de mémoire : {{ .Values.targetReplicas }}.
+Historique : helm history {{ .Release.Name }} -n {{ .Release.Namespace }}
+Retour arrière : helm rollback {{ .Release.Name }} <révision> -n {{ .Release.Namespace }}

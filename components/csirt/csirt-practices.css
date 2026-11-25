@@ -1,0 +1,702 @@
+.csirt-practices {
+  --practices-max: var(--csirt-max, 1280px);
+  background: #f4f7fb;
+  color: #142033;
+  padding-bottom: 1.75rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.csirt-practices__hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background: #06203f;
+}
+
+.csirt-practices__hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 68% center;
+}
+
+.csirt-practices__hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(4, 18, 48, 0.94) 0%, rgba(6, 32, 78, 0.82) 42%, rgba(8, 40, 90, 0.45) 100%);
+}
+
+.csirt-practices__hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(var(--practices-max), calc(100% - 1.5rem));
+  margin: 0 auto;
+  padding: 0.85rem 0 1rem;
+}
+
+.csirt-practices__crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 0.65rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.75rem;
+}
+
+.csirt-practices__crumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.csirt-practices__crumb a:hover,
+.csirt-practices__crumb strong {
+  color: #fff;
+}
+
+.csirt-practices__hero-top {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.csirt-practices__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: #1f8f3a;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.csirt-practices__hero h1 {
+  max-width: 36rem;
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.csirt-practices__hero h1 span {
+  color: #7dff9a;
+}
+
+.csirt-practices__lead {
+  max-width: 38rem;
+  margin: 0.45rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.csirt-practices__scene {
+  display: none;
+  position: relative;
+  width: 11.5rem;
+  height: 11.5rem;
+  margin-inline: auto;
+}
+
+.csirt-practices__map {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: rgba(126, 240, 223, 0.85);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 10px rgba(80, 220, 255, 0.35));
+}
+
+.csirt-practices__map circle {
+  fill: #9af6ff;
+  stroke: none;
+}
+
+.csirt-practices__shield {
+  position: absolute;
+  inset: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 1.3rem;
+  background: linear-gradient(160deg, rgba(16, 210, 190, 0.28), rgba(8, 90, 140, 0.2));
+  color: #b8fff4;
+  box-shadow:
+    0 0 0 10px rgba(20, 190, 200, 0.12),
+    0 0 28px rgba(40, 220, 220, 0.28);
+}
+
+.csirt-practices__shield svg:first-child {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.csirt-practices__shield svg:last-child {
+  position: absolute;
+  width: 1.35rem;
+  height: 1.35rem;
+  color: #fff;
+}
+
+.csirt-practices__rail {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csirt-practices__search {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+
+.csirt-practices__search-field,
+.csirt-practices__select,
+.csirt-practices__search button {
+  min-height: 2.35rem;
+  border-radius: 0.65rem;
+  border: 0;
+}
+
+.csirt-practices__select {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.65rem;
+  background: #fff;
+  color: #5b6b80;
+}
+
+.csirt-practices__search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 0.7rem;
+  background: #fff;
+  color: #5b6b80;
+}
+
+.csirt-practices__search input,
+.csirt-practices__select select {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #142033;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.csirt-practices__search input:focus,
+.csirt-practices__select select:focus {
+  outline: none;
+}
+
+.csirt-practices__select select {
+  min-height: 2.35rem;
+  padding: 0;
+}
+
+.csirt-practices__search button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0 0.85rem;
+  background: #1f8f3a;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.csirt-practices__search button:hover {
+  background: #187a30;
+}
+
+.csirt-practices__body {
+  width: min(var(--practices-max), calc(100% - 1.5rem));
+  margin: -0.35rem auto 0;
+}
+
+.csirt-practices__cats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csirt-practices__cats button {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  min-height: 3.4rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.csirt-practices__cats button span {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.45rem;
+  background: #fff;
+}
+
+.csirt-practices__cats strong {
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.csirt-practices__cats em {
+  min-width: 1.2rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.65rem;
+  font-style: normal;
+  font-weight: 800;
+  text-align: center;
+}
+
+.csirt-practices__cats .is-green { background: #e8f8ee; color: #157a38; }
+.csirt-practices__cats .is-blue { background: #e8f1ff; color: #1d4ed8; }
+.csirt-practices__cats .is-violet { background: #f3eaff; color: #7c3aed; }
+.csirt-practices__cats .is-red { background: #fdecef; color: #e11d48; }
+.csirt-practices__cats .is-orange { background: #fff3e8; color: #c2410c; }
+.csirt-practices__cats .is-cyan { background: #e7f8fb; color: #0e7490; }
+.csirt-practices__cats .is-lime { background: #eefbe8; color: #3f7d16; }
+.csirt-practices__cats .is-active { border-color: currentColor; }
+
+.csirt-practices__layout {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.1rem;
+}
+
+.csirt-practices__reflexes header,
+.csirt-practices__docs header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+.csirt-practices__reflexes h2,
+.csirt-practices__docs h2,
+.csirt-practices__help h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.csirt-practices__reflexes h2::before {
+  content: '';
+  width: 0.22rem;
+  height: 1.05em;
+  border-radius: 999px;
+  background: #1f8f3a;
+}
+
+.csirt-practices__reflexes header p,
+.csirt-practices__help p,
+.csirt-practices__tips p,
+.csirt-practices__phases p,
+.csirt-practices__empty {
+  margin: 0.25rem 0 0;
+  color: #526277;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.csirt-practices__reflexes header a,
+.csirt-practices__docs header a,
+.csirt-practices__phases button,
+.csirt-practices__help a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #1f8f3a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.csirt-practices__phases {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+}
+
+.csirt-practices__phases article,
+.csirt-practices__docs,
+.csirt-practices__tips article {
+  border: 1px solid #e5edf5;
+  border-radius: 0.9rem;
+  background: #fff;
+}
+
+.csirt-practices__phases article {
+  position: relative;
+  padding: 0.75rem 0.75rem 0.65rem;
+}
+
+.csirt-practices__phases article > header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.csirt-practices__num {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.csirt-practices__phases h3 {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.csirt-practices__phases .is-green .csirt-practices__num { background: #1f8f3a; color: #fff; }
+.csirt-practices__phases .is-green > header > svg { color: #1f8f3a; }
+.csirt-practices__phases .is-red .csirt-practices__num { background: #ef233c; color: #fff; }
+.csirt-practices__phases .is-red > header > svg { color: #ef233c; }
+.csirt-practices__phases .is-blue .csirt-practices__num { background: #2563eb; color: #fff; }
+.csirt-practices__phases .is-blue > header > svg { color: #2563eb; }
+
+.csirt-practices__phases ul {
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csirt-practices__phases li {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.csirt-practices__phases li svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-top: 0.1rem;
+  flex: none;
+}
+
+.csirt-practices__phases .is-green li svg { color: #1f8f3a; }
+.csirt-practices__phases .is-red li svg { color: #ef233c; }
+.csirt-practices__phases .is-blue li svg { color: #2563eb; }
+
+.csirt-practices__phases article > button {
+  margin-top: 0.7rem;
+}
+
+.csirt-practices__phase-arrow {
+  display: none;
+}
+
+.csirt-practices__reflexes header a {
+  min-height: 1.85rem;
+  padding: 0 0.7rem;
+  border: 1px solid #d5e2ee;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.csirt-practices__side {
+  display: grid;
+  gap: 0.65rem;
+  align-content: start;
+}
+
+.csirt-practices__docs,
+.csirt-practices__help {
+  padding: 0.75rem;
+}
+
+.csirt-practices__docs h2,
+.csirt-practices__help h2 {
+  font-size: 0.92rem;
+}
+
+.csirt-practices__docs ul {
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.csirt-practices__docs li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-top: 1px solid #eef2f6;
+}
+
+.csirt-practices__docs li span {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.4rem;
+  background: #eef6ff;
+  color: #2563eb;
+}
+
+.csirt-practices__docs strong {
+  display: block;
+  font-size: 0.75rem;
+}
+
+.csirt-practices__docs small {
+  color: #6b7c90;
+  font-size: 0.68rem;
+}
+
+.csirt-practices__docs li a {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.4rem;
+  background: #f3f6fa;
+  color: #334155;
+}
+
+.csirt-practices__help {
+  border-radius: 0.9rem;
+  background: #073526;
+  color: #fff;
+}
+
+.csirt-practices__help p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.csirt-practices__help div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.csirt-practices__help a {
+  min-height: 1.9rem;
+  padding: 0 0.65rem;
+  border-radius: 0.45rem;
+  color: #fff;
+}
+
+.csirt-practices__help a:first-child {
+  background: #ef233c;
+}
+
+.csirt-practices__help a:last-child {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.csirt-practices__tips {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.csirt-practices__tips article {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.7rem 0.75rem;
+}
+
+.csirt-practices__tips article > span {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+}
+
+.csirt-practices__tips .is-green > span { background: #e8f8ee; color: #1f8f3a; }
+.csirt-practices__tips .is-orange > span { background: #fff3e8; color: #c2410c; }
+.csirt-practices__tips .is-blue > span { background: #e8f1ff; color: #2563eb; }
+
+.csirt-practices__tips strong {
+  font-size: 0.78rem;
+}
+
+.csirt-practices__pager {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: flex-end;
+}
+
+.csirt-practices__pager button {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid #d7e0ea;
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.csirt-practices__pager span {
+  min-width: 2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.csirt-practices svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: none;
+}
+
+.csirt-practices a:focus-visible,
+.csirt-practices button:focus-visible,
+.csirt-practices input:focus-visible,
+.csirt-practices select:focus-visible {
+  outline: 2px solid #1f8f3a;
+  outline-offset: 2px;
+}
+
+@media (min-width: 760px) {
+  .csirt-practices__cats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .csirt-practices__search {
+    grid-template-columns: minmax(0, 1fr) 11rem 10rem auto;
+    align-items: center;
+  }
+
+  .csirt-practices__tips {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .csirt-practices__hero-top {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .csirt-practices__scene {
+    display: block;
+  }
+
+  .csirt-practices__rail {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .csirt-practices__rail li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.15rem;
+    padding: 0 0.7rem 0 0.35rem;
+    border-radius: 999px;
+    background: rgba(8, 24, 48, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.72rem;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+  }
+
+  .csirt-practices__rail li svg {
+    display: grid;
+    width: 1.55rem;
+    height: 1.55rem;
+    padding: 0.28rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .csirt-practices__rail .is-green svg { color: #7dff9a; }
+  .csirt-practices__rail .is-blue svg { color: #93c5fd; }
+  .csirt-practices__rail .is-violet svg { color: #d8b4fe; }
+  .csirt-practices__rail .is-orange svg { color: #fdba74; }
+
+  .csirt-practices__cats {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .csirt-practices__layout {
+    grid-template-columns: minmax(0, 1fr) 18.5rem;
+    align-items: start;
+  }
+
+  .csirt-practices__phases {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+
+  .csirt-practices__phase-arrow {
+    display: block;
+    position: absolute;
+    top: 1.15rem;
+    right: -0.85rem;
+    z-index: 2;
+    width: 1.15rem;
+    height: 1.15rem;
+    padding: 0.16rem;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(16, 36, 64, 0.12);
+  }
+
+  .csirt-practices__phase-arrow.is-green { color: #1f8f3a; }
+  .csirt-practices__phase-arrow.is-red { color: #ef233c; }
+}
